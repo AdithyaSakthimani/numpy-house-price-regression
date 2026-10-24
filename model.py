@@ -59,14 +59,25 @@ def clip_columns(X, lower, upper):
 # Step 4 - make_ratio_feature
 def make_ratio_feature(numerator, denominator, eps=1e-8):
     # TODO: Form a derived ratio feature from two 1-D arrays with safe division.
-    m ,  = numerator.shape
+    m , = numerator.shape
     res = np.zeros(m)
     for i in range(m) : 
         res[i] = numerator[i] / ( denominator[i] + eps )
     return res
 
-# Step 5 - append_column (not yet solved)
-# TODO: implement
+# Step 5 - append_column
+def append_column(X, col):
+    # TODO: Horizontally append one 1-D feature column onto a design matrix.
+    m , n  = X.shape 
+    j = 0 
+    nX = []
+    for i in range( m ) : 
+        s = X[i].tolist()
+        s.append(col[j])
+        ns = np.array(s)
+        nX.append(ns)
+        j+= 1 
+    return np.array(nX)
 
 # Step 6 - one_hot_encode (not yet solved)
 # TODO: implement
