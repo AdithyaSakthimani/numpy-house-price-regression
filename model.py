@@ -118,8 +118,12 @@ def apply_standardizer(X, mean, std):
             res[i][j] = np.float64((X[i][j] - mean[j]) / std[j] ) 
     return res
 
-# Step 9 - add_bias_column (not yet solved)
-# TODO: implement
+# Step 9 - add_bias_column
+def add_bias_column(X):
+    # TODO: Prepend a column of ones to a 2-D feature matrix X...
+    m , n = X.shape
+    col = np.full( m , 1.0 , dtype = np.float64 )
+    return np.column_stack( ( col , X ) )
 
 # Step 10 - make_shuffled_indices (not yet solved)
 # TODO: implement
