@@ -202,8 +202,20 @@ def root_mean_squared_error(y_true, y_pred):
     res /= ( m )
     return res ** (1/2)
 
-# Step 17 - r_squared (not yet solved)
-# TODO: implement
+# Step 17 - r_squared
+def r_squared(y_true, y_pred):
+    # TODO: Compute R^2 = 1 - SS_res/SS_tot (return 0.0 if SS_tot is 0)...
+    m , = y_true.shape
+    mn = np.mean(y_true)
+    SS_tot , SS_res = 0 , 0 
+    for i in range ( m ) : 
+        SS_tot += ( abs(y_true[i] - mn ) )  ** 2 
+        SS_res += ( abs(y_true[i] -  y_pred[i]) ) ** 2 
+    SS_tot /= ( m )
+    SS_res /= ( m )
+    if SS_tot == np.float64(0) : 
+        return np.float64(0)
+    return np.float64 ( 1 - (( SS_res ) / ( SS_tot )) )
 
 # Step 18 - residual_summary (not yet solved)
 # TODO: implement
