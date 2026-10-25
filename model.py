@@ -79,8 +79,24 @@ def append_column(X, col):
         j+= 1 
     return np.array(nX)
 
-# Step 6 - one_hot_encode (not yet solved)
-# TODO: implement
+# Step 6 - one_hot_encode
+def one_hot_encode(labels):
+    # TODO: Convert a 1-D array of categorical labels into a dense binary one-hot matrix.
+    m , = labels.shape
+    nl = labels.copy()
+    st = set()
+    for i in range ( m ) : 
+        if isinstance(nl[i] , str) : 
+            nl[i] = np.float64(ord(nl[i]) - ord('a'))
+        st.add(int(nl[i]))
+    res = [ [ 0 ] * len(st) for _ in range (m) ]
+    st = sorted(list(st))
+    # print(res)
+    for i in range ( m ) : 
+        for j in range ( len(st) ) : 
+            if int(nl[i]) == st[j] : 
+                res[i][j] = 1.0 
+    return np.array(res)
 
 # Step 7 - fit_standardizer (not yet solved)
 # TODO: implement
