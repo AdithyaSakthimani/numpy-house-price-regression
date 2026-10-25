@@ -168,8 +168,10 @@ def ols_fit(X, y):
     # TODO: return the ordinary-least-squares weight vector for a linear model.
     return np.linalg.inv(X.T @ X) @ X.T @ y
 
-# Step 14 - ols_predict (not yet solved)
-# TODO: implement
+# Step 14 - ols_predict
+def ols_predict(X, theta):
+    # TODO: Predict continuous targets with a fitted linear model.
+    return X @ theta
 
 # Step 15 - mean_absolute_error (not yet solved)
 # TODO: implement
