@@ -80,17 +80,25 @@ def append_column(X, col):
     return np.array(nX)
 
 # Step 6 - one_hot_encode
+from collections import defaultdict
 def one_hot_encode(labels):
     # TODO: Convert a 1-D array of categorical labels into a dense binary one-hot matrix.
     m , = labels.shape
-    nl = labels.copy()
-    st = set()
+    nl = labels.tolist()
+    snl = sorted(nl)
+    k = 0 
+    mp = defaultdict(int)
     for i in range ( m ) : 
-        if isinstance(nl[i] , str) : 
-            nl[i] = np.float64(ord(nl[i]) - ord('a'))
-        st.add(int(nl[i]))
+        if snl[i] not in mp : 
+            mp[snl[i]] = k 
+            k+= 1 
+        else : 
+            snl[i] = mp[snl[i]]
+    for i in range ( m ) : 
+        nl[i] = mp[nl[i]]
+    # print(nl)
+    st = sorted(set(nl))
     res = [ [ 0 ] * len(st) for _ in range (m) ]
-    st = sorted(list(st))
     # print(res)
     for i in range ( m ) : 
         for j in range ( len(st) ) : 
@@ -244,8 +252,22 @@ def prepare_cleaned_features(X, iqr_k=1.5):
     X = clip_columns(X , lower , upper )
     return X
 
-# Step 20 - assemble_feature_matrix (not yet solved)
-# TODO: implement
+# Step 20 - assemble_feature_matrix
+import numpy as np 
+def assemble_feature_matrix(X_num, ratio_num_idx, ratio_den_idx, cat_labels=None):
+    # TODO: build an extended feature matrix by appending a derived ratio...
+    num = []
+    den = []
+    m , n = X_num.shape 
+    for i in range ( m ) : 
+        num.append(X_num[i][ratio_num_idx])
+        den.append(X_num[i][ratio_den_idx])
+    col = make_ratio_feature(np.array(num) , np.array(den))
+    X_num = append_column(X_num , col)
+    if cat_labels != None : 
+        labels = one_hot_encode(cat_labels)
+        X_num = np.hstack((X_num, labels))
+    return X_num
 
 # Step 21 - make_train_val_test (not yet solved)
 # TODO: implement
