@@ -151,8 +151,17 @@ def partition_indices(indices, train_ratio, val_ratio):
             tst.append(indices[i])
     return np.array(train) ,  np.array(val) , np.array(tst)
 
-# Step 12 - subset_xy (not yet solved)
-# TODO: implement
+# Step 12 - subset_xy
+def subset_xy(X, y, indices):
+    # TODO: Select the rows of X and y at the given indices.
+    xRes , yRes = [] , []
+    nX = X.tolist()
+    ny = y.tolist()
+    nid = indices.tolist()
+    for idx in nid : 
+        xRes.append(nX[int(idx)])
+        yRes.append(ny[int(idx)])
+    return np.array(xRes , dtype = np.float64) , np.array(yRes , dtype = np.float64)
 
 # Step 13 - ols_fit (not yet solved)
 # TODO: implement
