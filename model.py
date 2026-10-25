@@ -264,7 +264,7 @@ def assemble_feature_matrix(X_num, ratio_num_idx, ratio_den_idx, cat_labels=None
         den.append(X_num[i][ratio_den_idx])
     col = make_ratio_feature(np.array(num) , np.array(den))
     X_num = append_column(X_num , col)
-    if cat_labels != None : 
+    if cat_labels is not None:
         labels = one_hot_encode(cat_labels)
         X_num = np.hstack((X_num, labels))
     return X_num
