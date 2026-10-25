@@ -108,8 +108,15 @@ def fit_standardizer(X):
             std[i] = np.float64(1.0)
     return mn , std
 
-# Step 8 - apply_standardizer (not yet solved)
-# TODO: implement
+# Step 8 - apply_standardizer
+def apply_standardizer(X, mean, std):
+    # TODO: Return the scaled matrix (X - mean) / std via broadcasting.
+    N , F = X.shape 
+    res = np.zeros_like(X , dtype = np.float64)
+    for i in range ( N ) : 
+        for j in range ( F ) : 
+            res[i][j] = np.float64((X[i][j] - mean[j]) / std[j] ) 
+    return res
 
 # Step 9 - add_bias_column (not yet solved)
 # TODO: implement
