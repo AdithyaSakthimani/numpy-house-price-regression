@@ -269,8 +269,20 @@ def assemble_feature_matrix(X_num, ratio_num_idx, ratio_den_idx, cat_labels=None
         X_num = np.hstack((X_num, labels))
     return X_num
 
-# Step 21 - make_train_val_test (not yet solved)
-# TODO: implement
+# Step 21 - make_train_val_test
+def make_train_val_test(X, y, train_ratio, val_ratio, seed):
+    # TODO: Shuffle and materialize train/validation/test matrices from X and y...
+    n_samples = X.shape[0]
+    nr = make_shuffled_indices(n_samples , seed)
+    i1 , i2 , i3 = partition_indices(
+        nr , train_ratio , val_ratio
+    )
+    x1 , y1 = subset_xy(X,y,i1)
+    x2 , y2 = subset_xy(X,y,i2)
+    x3 , y3 = subset_xy(X,y,i3)
+    return { 
+         'X_train' : x1 , 'y_train' : y1  , 'X_val' : x2, 'y_val' : y2 , 'X_test' : x3, 'y_test' : y3
+    }
 
 # Step 22 - standardize_and_add_bias (not yet solved)
 # TODO: implement
